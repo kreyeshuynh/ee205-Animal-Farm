@@ -39,7 +39,7 @@ int fixCat(int index){
     return true;
 }
 
-int updateCatWeight(int index, float newWeight){
+int updateCatWeight(int index, Weight newWeight){
 
     if (newWeight < 0){
 

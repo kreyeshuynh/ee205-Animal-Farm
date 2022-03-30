@@ -16,7 +16,7 @@ int updateCatName(int index, char newName[]);
 
 int fixCat(int index);
 
-int updateCatWeight(int index, float newWeight);
+int updateCatWeight(int index, Weight newWeight);
 
 int updateCatCollar1(int index, enum Color newCollar1);
 

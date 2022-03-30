@@ -19,7 +19,7 @@
 #define PROGRAM_NAME "addCat.c"
 
 
-int addCat( const char CatName[], const enum catGender Gender, const enum catBreed Breed, const bool IsFixed, const float Weight, const enum Color CollarColor1, const enum Color CollarColor2, const unsigned long long License ) {
+int addCat( const char CatName[], const enum catGender Gender, const enum catBreed Breed, const bool IsFixed, const Weight Weight, const enum Color CollarColor1, const enum Color CollarColor2, const unsigned long long License ) {
 
     size_t nameLength = strlen(CatName);
 

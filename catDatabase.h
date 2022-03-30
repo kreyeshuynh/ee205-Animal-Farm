@@ -21,6 +21,8 @@ enum catGender { UNKNOWN_GENDER, MALE, FEMALE };
 enum catBreed  { UNKNOWN_BREED, MAINE_COON, MANX, SHORTHAIR, PERSIAN, SPHYNX };
 enum Color     { BLACK, WHITE, RED, BLUE, GREEN, PINK };
 
+typedef float Weight;
+
 //declaring struct
 extern struct Cat{
 
@@ -28,7 +30,7 @@ extern struct Cat{
     enum  catGender gender;
     enum  catBreed breed;
     bool  is_fixed;
-    float weight;
+    Weight weight;
     enum  Color collarColor1;
     enum  Color collarColor2;
     unsigned long long license;
