@@ -22,7 +22,7 @@
 int updateCatName(int index, char newName[]){
 
     //check if the character array is unique
-    for (int i = 0; numCats >= i; i++){
+    for (int i = 0; NumCats >= i; i++){
         if (strcmp(newName, catIndex[i].catName) == 0){
             fprintf( stderr, "%s: Cat name [%s] is already in the database.\n",PROGRAM_NAME, newName);
             return false;

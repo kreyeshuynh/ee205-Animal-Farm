@@ -48,7 +48,7 @@ extern struct Cat catIndex[MAX_CATS];
 
 
 //global variable to indicated the current number of cats
-extern int numCats;
+typedef int NumCats;
 
 //initialize initializeDatabase()
 extern void initializeDatabase();

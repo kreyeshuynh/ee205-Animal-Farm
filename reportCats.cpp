@@ -21,7 +21,7 @@
 //print cat given the spot in the database
 void printCat(int index){
 
-    if (index < 0 || index > numCats){
+    if (index < 0 || index > NumCats){
         printf("animalFarm1: Bad Cat [%d]\n", index);
         exit(EXIT_FAILURE);
     }
@@ -33,26 +33,26 @@ void printCat(int index){
 
 //print all cats
 void printAllCats(){
-    numCats = numCats - 1;
+    NumCats = NumCats - 1;
     //go through all of the index while it not going over the ammount stored and print all of the specifications
-    for (int index = 0; index <= numCats; index++){
+    for (int index = 0; index <= NumCats; index++){
 
         printf("cat index = [%d]\tname = ",index);
         printf(catIndex[index].catName);
         printf("\tgender = [%s]\tbreed = [%s]\tisFixed = [%d]\tweight = [%f]\tcollar color 1 = [%s]\tcollar color 2 = [%s]\tlicense = [%lld]\n", genderName(catIndex[index].gender), breedName(catIndex[index].breed), catIndex[index].is_fixed, catIndex[index].weight, colorName(catIndex[index].collarColor1), colorName(catIndex[index].collarColor2), catIndex[index].license);
     }
-    numCats = numCats + 1;
+    NumCats = NumCats + 1;
 }
 
 int findCat(char name[]){
 
     int temp = 0;
     //go through all of the cat names and see if there is a match
-    for(int index = 0; index <= numCats; index++){
+    for(int index = 0; index <= NumCats; index++){
 
         if (strcmp(name, catIndex[index].catName) == 0){
             temp = index;
-            index = numCats + 1;
+            index = NumCats + 1;
 
             printf("cat index = [%d]\n", temp);
             continue;
