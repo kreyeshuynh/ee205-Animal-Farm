@@ -1,12 +1,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///         University of Hawaii, College of Engineering
-/// @brief  Project - EE 205 - Spr 2022
+/// @brief  ee205_lab10d_animal_farm_2 - EE 205 - Spr 2022
 ///
 /// @file Cat.cpp
 /// @version 1.0
 ///
 /// @author Kaianu Reyes-Huynh <@kaianu@hawaii.edu>
-/// @date   08_Apr_2022
+/// @date   10_Apr_2022
 ///////////////////////////////////////////////////////////////////////////////
 
 #include <cstring>
