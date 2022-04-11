@@ -25,6 +25,7 @@ Cat* catDatabaseHeadPointer = nullptr;
 
 int numCats = 0;
 
+//initialize database for cats
 void initializeDatabase(){
     if(catDatabaseHeadPointer != nullptr){
         throw logic_error( PROGRAM_NAME ": Delete old database")
@@ -32,80 +33,45 @@ void initializeDatabase(){
 
     assert( validateDatabase());
 }
+//verify if cat is in database
+bool isCatInDatabase( const Cat* aCat ) {
+    assert( aCat != nullptr ) ;
 
-//convert gender to strings
-extern char* genderName (const enum catGender gender){
+    assert( validateDatabase() ) ;
 
-    switch (gender){
-        case 0:
-            return "Unknown Gender";
-            break;
-        case 1:
-            return "Male";
-            break;
-        case 2:
-            return "Female";
-            break;
-        default:
-            return "Non-valid gender";
-            exit(EXIT_FAILURE);
-    }
-}
-
-//convert breed to strings
-extern char* breedName (const enum catBreed breed){
-
-    switch (breed){
-        case 0:
-            return "Unknown Breed";
-            break;
-        case 1:
-            return "Maine Coon";
-            break;
-        case 2:
-            return "Manx";
-            break;
-        case 3:
-            return "Shorthair";
-            break;
-        case 4:
-            return "Persian";
-            break;
-        case 5:
-            return "Sphynx";
-            break;
-        default:
-            return "Non-valid breed";
-            exit(EXIT_FAILURE);
+    for(Cat* idexCat = catDatabaseHeadPointer ; idexCat != nullptr ; idexCat = idexCat->next ) {
+        if( idexCat == aCat ) {
+            return true ;
+        }
     }
 
+    assert( validateDatabase() ) ;
+
+    return false ; 
 }
+//validates if database is working correctly
+extern bool validateDatabase() {
+    int validCats = 0 ;
 
-//convert color to strings
-extern char* colorName (const enum Color color ){
+    for(Cat* idexCat = catDatabaseHeadPointer ; idexCat != nullptr ; idexCat = iCat->next ) {
+        if( !idexCat->validate() ) {
+            return false ;
+        }
 
-    switch (color){
-        case 0:
-            return "Black";
-            break;
-        case 1:
-            return "White";
-            break;
-        case 2:
-            return "Red";
-            break;
-        case 3:
-            return "Blue";
-            break;
-        case 4:
-            return "Green";
-            break;
-        case 5:
-            return "Pink";
-            break;
-        default:
-            return "Non-valid color";
-            exit(EXIT_FAILURE);
+        Cat* foundCat = findCatByName( idexCat->getName() ) ;
+        if( foundCat != iCat ) {
+            cout << PROGRAM_NAME ": Warning:  Found a duplicate cat name [" << idexCat->getName() << "]" << endl ;
+        }
+
+        validCats++ ;
     }
 
+    if( validCats != numberOfCats ) {
+        cout << PROGRAM_NAME << ": Error:  numCats [" << numCats
+             << "] does not equal [" << validCats << "]" << endl ;
+        return false ;
+    }
+
+    return true ;  // The database is healthy
 }
+
