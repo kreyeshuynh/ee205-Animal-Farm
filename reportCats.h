@@ -9,15 +9,20 @@
 /// @date   20_Mar_2022
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "catDatabase.h"
+#include "Cat.h"
 
 #pragma once
 
-void printCat(int index);
+//print all cats
+extern bool printAllCats();
 
-void printAllCats();
+//find cat
+extern Cat* findCatByName(const char* name)
 
-int findCat(char name[]);
+//return name of gender
+extern const char* genderName( enum Gender gender);
+
+//return name of breed
+extern const char* breedName( enum Breed breed);
 

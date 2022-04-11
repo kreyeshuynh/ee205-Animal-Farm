@@ -10,53 +10,47 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include "addCats   .h"
+#include <cstring>
+#include <stdexcept>
+#include <iostream>
+#include <cassert>
+
+#include "addCats.h"
 #include "catDatabase.h"
 #include "reportCats.h"
+#include "Cat.h"
 
-//print cat given the spot in the database
-void printCat(int index){
+using namespace std;
 
-    if (index < 0 || index > NumCats){
-        printf("animalFarm1: Bad Cat [%d]\n", index);
-        exit(EXIT_FAILURE);
+//printing all cats in database
+bool printAllCats(){
+
+    int numCats = 0;
+
+    assert( validateDatabase());
+
+    for(Cat* indexCat = catDatabaseHeadPointer ; indexCat != nullptr; indexCat = idexCat->next){
+        indexCat->print();
+        numCats++;
     }
 
-    printf("cat index = [%d]\tname = ",index);
-    printf(catIndex[index].catName);
-    printf("\tgender = [%s]\tbreed = [%s]\tisFixed = [%d]\tweight = [%f]\tcollar color 1 = [%s]\tcollar color 2 = [%s]\tlicense = [%lld]\n", genderName(catIndex[index].gender), breedName(catIndex[index].breed), catIndex[index].is_fixed, catIndex[index].weight, colorName(catIndex[index].collarColor1), colorName(catIndex[index].collarColor2), catIndex[index].license);
+    assert(validateDatabase());
+    return true;
 }
 
-//print all cats
-void printAllCats(){
-    NumCats = NumCats - 1;
-    //go through all of the index while it not going over the ammount stored and print all of the specifications
-    for (int index = 0; index <= NumCats; index++){
+Cat* findCatByName(const char* name){
 
-        printf("cat index = [%d]\tname = ",index);
-        printf(catIndex[index].catName);
-        printf("\tgender = [%s]\tbreed = [%s]\tisFixed = [%d]\tweight = [%f]\tcollar color 1 = [%s]\tcollar color 2 = [%s]\tlicense = [%lld]\n", genderName(catIndex[index].gender), breedName(catIndex[index].breed), catIndex[index].is_fixed, catIndex[index].weight, colorName(catIndex[index].collarColor1), colorName(catIndex[index].collarColor2), catIndex[index].license);
-    }
-    NumCats = NumCats + 1;
-}
+    assert( Cat().validateName( name ));
 
-int findCat(char name[]){
-
-    int temp = 0;
-    //go through all of the cat names and see if there is a match
-    for(int index = 0; index <= NumCats; index++){
-
-        if (strcmp(name, catIndex[index].catName) == 0){
-            temp = index;
-            index = NumCats + 1;
-
-            printf("cat index = [%d]\n", temp);
-            continue;
+    for(Cat* indexCat = catDatabaseHeadPointer; idexCat != nullptr; idexCat = idexCat->next){
+        if( strcmp(name, idexCat->getName() ) == 0) {
+            return indexCat;
         }
     }
-    return temp;
+
+    return nullptr;
+
 }
+
+
+
