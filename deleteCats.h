@@ -9,6 +9,12 @@
 /// @date   20_Mar_2022
 ///////////////////////////////////////////////////////////////////////////////
 
+#include "Cat.h"
+
 #pragma once
 
-void deleteAllCats();
+/// delete all cats
+extern bool deleteAllCats() ;
+
+/// delete a cat given pointer to cat
+extern bool deleteCat( Cat* deleteCat ) ;

@@ -20,8 +20,8 @@
 #define PROGRAM_NAME "animalfarm2"
 #pragma once
 
-enum catGender { UNKNOWN_GENDER, MALE, FEMALE };
-enum catBreed  { UNKNOWN_BREED, MAINE_COON, MANX, SHORTHAIR, PERSIAN, SPHYNX };
+enum Gender { UNKNOWN_GENDER, MALE, FEMALE };
+enum Breed  { UNKNOWN_BREED, MAINE_COON, MANX, SHORTHAIR, PERSIAN, SPHYNX };
 enum Color     { BLACK, WHITE, RED, BLUE, GREEN, PINK };
 
 //Weight defined type
