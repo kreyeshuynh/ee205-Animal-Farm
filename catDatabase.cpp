@@ -11,45 +11,26 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdexcept>
+#include <cassert>
+#include <iostream>
+
 #include "catDatabase.h"
+#include "Cat.h"
+#include "reportCats.h"
 
+using namespace std;
 
-//char  catName[MAX_LENGTH][MAX_CATS];
-//enum  catGender gender[MAX_CATS];
-//enum  catBreed breed[MAX_CATS];
-//bool  is_fixed[MAX_CATS];
-//float weight[MAX_CATS];
-
-struct Cat catIndex[MAX_CATS];
+Cat* catDatabaseHeadPointer = nullptr;
 
 int numCats = 0;
 
 void initializeDatabase(){
-
-    //catName initialization
-    for(int i = 0; i < MAX_CATS; i++){
-        memcpy(catIndex[i].catName,"\0", MAX_LENGTH);
+    if(catDatabaseHeadPointer != nullptr){
+        throw logic_error( PROGRAM_NAME ": Delete old database")
     }
 
-    //gender initialization
-    for( int i = 0; i < MAX_CATS; i++){
-        catIndex[i].gender = 0;
-    }
-
-    //breed initialization
-    for( int i = 0; i < MAX_CATS; i++){
-        catIndex[i].breed = 0;
-    }
-
-    //is_fixed initialization
-    for( int i = 0; i < MAX_CATS; i++){
-        catIndex[i].is_fixed = 0;
-    }
-
-    //weight initialization
-    for( int i = 0; i < MAX_CATS; i++){
-        catIndex[i].weight = 0.0;
-    }
+    assert( validateDatabase());
 }
 
 //convert gender to strings

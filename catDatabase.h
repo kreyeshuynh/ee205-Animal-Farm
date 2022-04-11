@@ -11,54 +11,37 @@
 
 #include <stdbool.h>
 #include <string.h>
+#include <cstddef>
 
-#define MAX_LENGTH  51    //Max length of characters in a cat's name
+#define MAX_LENGTH  50    //Max length of characters in a cat's name
 #define MAX_CATS    1024    //Max number of cats in the array
 
+#define PROGRAM_TITLE "Animal Farm 2"
+#define PROGRAM_NAME "animalfarm2"
 #pragma once
 
 enum catGender { UNKNOWN_GENDER, MALE, FEMALE };
 enum catBreed  { UNKNOWN_BREED, MAINE_COON, MANX, SHORTHAIR, PERSIAN, SPHYNX };
 enum Color     { BLACK, WHITE, RED, BLUE, GREEN, PINK };
 
+//Weight defined type
 typedef float Weight;
 
-//declaring struct
-extern struct Cat{
+//define unknown_weight to -1
+const Weight UNKNOWN_WEIGHT = -1;
 
-    char  catName[MAX_CATS];
-    enum  catGender gender;
-    enum  catBreed breed;
-    bool  is_fixed;
-    Weight weight;
-    enum  Color collarColor1;
-    enum  Color collarColor2;
-    unsigned long long license;
-
-} Cat;
-
-extern struct Cat catIndex[MAX_CATS];
-
-//declaring cat description arrays
-//extern char  catName[MAX_LENGTH][MAX_CATS];
-//extern enum  catGender gender[MAX_CATS];
-//extern enum  catBreed breed[MAX_CATS];
-//extern bool  is_fixed[MAX_CATS];
-//extern float weight[MAX_CATS];
+//head pointer for database
+extern Cat* catDatabaseHeadPointer ;
 
 
-//global variable to indicated the current number of cats
-typedef int NumCats;
+extern int numCats ;
 
-//initialize initializeDatabase()
-extern void initializeDatabase();
+//initializes the cat database
+extern void initializeDatabase() ;
 
-//gender
-extern char* genderName (const enum catGender gender);
+//verifies if cat is in database
+extern bool isCatInDatabase( const Cat* aCat ) ;
 
-//breed
-extern char* breedName (const enum catBreed breed);
-
-//color
-extern char* colorName (const enum Color color );
+//verifies if the database works
+extern bool validateDatabase() ;
 
