@@ -12,10 +12,10 @@
 
 #include <stdbool.h>
 #include "catDatabase.h"
+#include "Cat.h"
+
 #pragma once
 
 
 //headerfile for adding cats
-
-extern int addCat( const char CatName[], const enum catGender Gender, const enum catBreed Breed, const bool IsFixed, const Weight Weight, const enum Color CollarColor1, const enum Color CollarColor2, const unsigned long long License );
-
+extern bool addCat( Cat* newCat ) ;
