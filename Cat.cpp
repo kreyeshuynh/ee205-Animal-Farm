@@ -19,10 +19,10 @@
 #include "Cat.h"
 #include "reportCats.h"
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "UnreachableCode"
+using namespace std ;
+
 void Cat::zeroOutData() {
-    memset( name, 0, MAX_CAT_NAME );
+    memset( name, 0, MAX_LENGTH );
     gender = UNKNOWN_GENDER ;
     breed = UNKNOWN_BREED ;
     isCatFixed = false ;
@@ -49,70 +49,68 @@ Cat::~Cat() {
 
 
 const char *Cat::getName() const noexcept {
-return name;
+    return name;
 }
 
 void Cat::setName(const char *newName) {
     validateName( newName ) ;
-
-    memset( name, 0, MAX_CAT_NAME );
+    memset( name, 0, MAX_LENGTH);
     strcpy( name, newName );
 }
 
 Gender Cat::getGender() const noexcept {
-return gender;
+    return gender;
 }
 
 Breed Cat::getBreed() const noexcept {
-return breed;
+    return breed;
 }
 
 bool Cat::isFixed() const noexcept {
-return isCatFixed;
+    return isCatFixed;
 }
 
 Weight Cat::getWeight() const noexcept {
-return weight;
+    return weight;
 }
 
 /// Format a line for printing the members of a class
 #define FORMAT_LINE( className, member ) cout << setw(8) << (className) << setw(20) << (member) << setw(52)
 
 bool Cat::print() const noexcept {
-assert( validate() ) ;
+    assert( validate() ) ;
 
-cout << setw(80) << setfill( '=' ) << "" << endl ;
-cout << setfill( ' ' ) ;
-cout << left ;
-cout << boolalpha ;
-FORMAT_LINE( "Cat", "name" )         << getName()   << endl ;
-FORMAT_LINE( "Cat", "gender" )       << genderName( getGender() ) << endl ;
-FORMAT_LINE( "Cat", "breed" )        << breedName( getBreed() )   << endl ;
-FORMAT_LINE( "Cat", "isFixed" )      << isFixed()   << endl ;
-FORMAT_LINE( "Cat", "weight" )       << getWeight() << endl ;
+    cout << setw(80) << setfill( '=' ) << "" << endl ;
+    cout << setfill( ' ' ) ;
+    cout << left ;
+    cout << boolalpha ;
+    FORMAT_LINE( "Cat", "name" )         << getName()   << endl ;
+    FORMAT_LINE( "Cat", "gender" )       << genderName( getGender() ) << endl ;
+    FORMAT_LINE( "Cat", "breed" )        << breedName( getBreed() )   << endl ;
+    FORMAT_LINE( "Cat", "isFixed" )      << isFixed()   << endl ;
+    FORMAT_LINE( "Cat", "weight" )       << getWeight() << endl ;
 
-return true ;
+    return true ;
 }
 
 
 bool Cat::validate() const noexcept {
-try {
-validateName( name ) ;
-validateGender( gender ) ;
-validateBreed( breed ) ;
-validateWeight( weight ) ;
-} catch (exception const& e) {
-cout << e.what() << endl ;
-return false ;
-}
-
-return true;
+    try {
+        validateName( name ) ;
+        validateGender( gender ) ;
+        validateBreed( breed ) ;
+        validateWeight( weight ) ;
+    } catch (exception const& e) {
+        cout << e.what() << endl ;
+        return false ;
+    }
+    return true;
 }
 
 //if non usable name
 bool Cat::validateName(const char *newName) {
     if( newName == nullptr ) {
-        throw invalid_argument(PROGRAM_NAME ": name must not be NULL");
+        throw invalid_argument(PROGRAM_NAME ": name must not be empty");
     }
 
     if( strlen( newName ) <= 0 ) {
@@ -120,7 +118,7 @@ bool Cat::validateName(const char *newName) {
     }
 
     if( strlen( newName ) >= MAX_CAT_NAME ) {
-        throw length_error( PROGRAM_NAME ": name must be < MAX_CAT_NAME" );
+        throw length_error( PROGRAM_NAME ": name must be < MAX_LENGTH" );
     }
 
     return true;
@@ -152,10 +150,9 @@ bool Cat::validateWeight(const Weight newWeight) {
 
     return true;
 }
-
-
+//cannot be unfixed
 void Cat::fixCat() noexcept {
-Cat::isCatFixed = true;
+    Cat::isCatFixed = true;
 }
 
 
@@ -164,6 +161,7 @@ void Cat::setWeight(Weight newWeight) {
     Cat::weight = newWeight;
 }
 
+//set gender
 void Cat::setGender(Gender newGender) {
     if( gender != UNKNOWN_GENDER ) {
         throw logic_error( PROGRAM_NAME ": The gender is already set, you can't change it" ) ;
@@ -173,13 +171,12 @@ void Cat::setGender(Gender newGender) {
     Cat::gender = newGender ;
 }
 
+//set breed
 void Cat::setBreed(Breed newBreed) {
     if( breed != UNKNOWN_BREED ) {
         throw logic_error( PROGRAM_NAME ": The breed is already set, you can't change it" ) ;
     }
 
-
     validateBreed( newBreed ) ;
     Cat::breed = newBreed;
 }
-#pragma clang diagnostic pop

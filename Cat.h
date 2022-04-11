@@ -12,8 +12,6 @@
 #include "catDatabase.h"
 #pragma once
 
-#ifndef EE205_LAB_08D_ANIMAL_FARM_1_TO_CLION_CAT_H
-#define EE205_LAB_08D_ANIMAL_FARM_1_TO_CLION_CAT_H
 
 
 class Cat {
