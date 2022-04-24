@@ -4,56 +4,46 @@
 ///
 ///
 /// @file animalFarm.c
-/// @version 1.0
+/// @version 3.0
 ///
 /// @author Kaianu Reyes-Huynh <kaianu@hawaii.edu>
-/// @date   03/20/2022
+/// @date   04/24/2022
 ///////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <assert.h>
-#include "catDatabase.h"
-#include "addCats.h"
-#include "reportCats.h"
-#include "updateCats.h"
-#include "deleteCats.h"
+#include <cstdlib>  // For EXIT_SUCCESS / EXIT_FAILURE
+#include <iostream>
 
-#define MAX_NAME1 "1234567890123456789012345678901234567890123456789"
-#define MAX_NAME2 "DIFFERENT 123456789012345678901234567890123456789"
-#define ILLEGAL_NAME "12345678901234567890123456789012345678901234567890"
+#include "config.h"
+#include "Cat.h"
+#include "SinglyLinkedList.h"
+
+using namespace std ;
 
 
-int main (){
+/// The entry point for Animal Farm
+int main() {
+    cout << "Starting " << PROGRAM_TITLE << endl ;
 
-    printf("Starting Animal Farm 1\n\n");
+    SinglyLinkedList catDB ;
 
-    addCat( "Loki", MALE, PERSIAN, true, 8.5, BLACK, WHITE, 101 ) ;
-    addCat( "Milo", MALE, MANX, true, 7.0, BLACK, RED, 102 ) ;
-    addCat( "Bella", FEMALE, MAINE_COON, true, 18.2, BLACK, BLUE, 103 ) ;
-    addCat( "Kali", FEMALE, SHORTHAIR, false, 9.2, BLACK, GREEN, 104 ) ;
-    addCat( "Trin", FEMALE, MANX, true, 12.2, BLACK, PINK, 105 ) ;
-    addCat( "Chili", UNKNOWN_GENDER, SHORTHAIR, false, 19.0, WHITE, BLACK, 106 ) ;
+    catDB.push_front( new Cat( "Loki",  Color::CREAM,  true, Gender::MALE,   1.0 ) ) ;
+    catDB.push_front( new Cat( "Milo",  Color::BLACK,  true, Gender::MALE,   1.1 ) ) ;
+    catDB.push_front( new Cat( "Bella", Color::BROWN,  true, Gender::FEMALE, 1.2 ) ) ;
+    catDB.push_front( new Cat( "Kali",  Color::CALICO, true, Gender::FEMALE, 1.3 ) ) ;
+    catDB.push_front( new Cat( "Trin",  Color::WHITE,  true, Gender::FEMALE, 1.4 ) ) ;
 
+    catDB.insert_after(catDB.get_first(), new Cat( "Chili", Color::GINGER, true, Gender::MALE,   1.5 ) );
 
-    printAllCats() ;
-    int kali = findCat( "Kali" ) ;
-    assert( updateCatName( kali, "Chili" ) == false ) ; // duplicate cat name should fail
-    printCat( kali ) ;
-    assert( updateCatName( kali, "Capulet" ) == true ) ;
-    assert( updateCatWeight( kali, 9.9 ) == true ) ;
-    assert( fixCat( kali ) == true ) ;
-    assert( updateCatCollar1( kali, GREEN ) == true ) ;
-    assert( updateCatCollar2( kali, GREEN ) == true ) ;
-    assert( updateLicense( kali, 201 ) == true ) ;
+    for( Animal* pAnimal = (Animal*)catDB.get_first() ; pAnimal != nullptr ; pAnimal = (Animal*)List::get_next( (Node*)pAnimal ) ) {
+        cout << pAnimal->speak() << endl;
+    }
 
-    printCat( kali ) ;
-    printAllCats() ;
-    deleteAllCats() ;
-    printAllCats() ;
+    catDB.validate() ;
+    catDB.dump() ;
+    catDB.deleteAllNodes() ;
+    catDB.dump() ;
 
-    printf("\nDone with Animal Farm 1\n");
+    cout << "Done with " << PROGRAM_TITLE ;
 
     return( EXIT_SUCCESS ) ;
 }
