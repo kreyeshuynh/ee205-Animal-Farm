@@ -6,4 +6,4 @@ project(ee205-Animal-Farm
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
-add_executable(ee205-Animal-Farm main.cpp Cat.cpp Cat.h Animal.cpp Animal.h config.h gender.h Weight.cpp Weight.h Color.h)
+add_executable(ee205-Animal-Farm main.cpp Cat.cpp Cat.h Animal.cpp Animal.h config.h gender.h Weight.cpp Weight.h Color.h Node.cpp Node.h SinglyLinkedList.cpp SinglyLinkedList.h)
