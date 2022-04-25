@@ -11,6 +11,7 @@
 #pragma once
 
 #include <string>
+
 #include "config.h"
 #include "Node.h"
 #include "Gender.h"
@@ -27,7 +28,7 @@ private:
     Weight weight;                           //weight of animal
 
 public:
-    /// minimum member variables to create an animal class
+    /// minimum member variables to create an animal class: weight class species
     Animal( const Weight::t_weight newMaxWeight
             ,const std::string&     newClassification
             ,const std::string&     newSpecies

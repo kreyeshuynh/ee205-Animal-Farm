@@ -1,66 +1,70 @@
 ///////////////////////////////////////////////////////////////////////////////
 ///         University of Hawaii, College of Engineering
-/// @brief  ee205_lab10d_animal_farm_2 - EE 205 - Spr 2022
+/// @brief  ee205_Animal_Farm - EE 205 - Spr 2022
 ///
 /// @file Cat.h
-/// @version 1.0
+/// @version 3.0
 ///
 /// @author Kaianu Reyes-Huynh <@kaianu@hawaii.edu>
-/// @date   08_Apr_2022
+/// @date   24_Apr_2022
 ///////////////////////////////////////////////////////////////////////////////
-
-#include "catDatabase.h"
 #pragma once
 
+#include <string>
 
+#include "config.h"
+#include "Mammal.h"
 
-class Cat {
-protected:
-    char    name[MAX_LENGTH];
-    enum Gender gender ;
-    enum Breed  breed ;
-    bool isFixed ;
-    Weight weight ;
-
+class Cat : public Mammal {
 public:
-    Cat* next ;
-
-public:
-    void zeroOutData();
-
-public:
-    Cat();
-
-    Cat( const char *newName, const Gender newGender, const Breed newBreed, const Weight newWeight) ;
-
-    virtual ~Cat();
-
-    //getters and setters
-public:
-    const char *getName() const noexcept;
-    void setName (const char* newName);
-    Gender getGender() const noexcept;
-    Breed getBreed() const noexcept;
-    bool isFixed() const noexcept;
-    Weight getWeight() const noexcept;
-    void setWeight(Weight newWeight);
+    static const std::string      SPECIES_NAME;
+    static const Weight::t_weight MAX_WEIGHT;    //max weight
 
 protected:
-public:
-    void setGender(Gender newGender);
-    void setBreed(Breed newBreed);
+    std::string name ;        //name of cat
+    bool        isCatFixed ;  //true if cat is fixed
 
 public:
-    bool print() const noexcept;
-    bool validate() const noexcept;
+    explicit Cat( const std::string& newName ) : Mammal( MAX_WEIGHT, SPECIES_NAME ) {
+        if( !validateName( newName) ) {
+            //if cat does not have a name
+            throw std::out_of_range( "Cats must have a name" );
+        }
+        name = newName;
+        isCatFixed = false;
+
+        Cat::validate();
+    }
+
+    // all member variables
+    Cat( const std::string&     newName
+            ,const Color            newColor
+            ,const bool             newIsFixed
+            ,const Gender           newGender
+            ,const Weight::t_weight newWeight
+    ) : Mammal( newColor, newGender, newWeight, MAX_WEIGHT, SPECIES_NAME ) {
+        if( !validateName( newName) ) {
+            //if cat does not have a name
+            throw std::out_of_range( "Cats must have a name" );
+        }
+        name = newName;
+        isCatFixed = newIsFixed;
+
+        Cat::validate();
+    }
 
 public:
-    static bool validateName( const char* newName);
-    static bool validateGender( const Gender newGender);
-    static bool validateBreed (const Breed newBreed);
-    static bool validateWeight(const Weight newWeight);
+    std::string getName() const noexcept ;  //getter for cat name
+    void setName( const std::string& newName );   //setter for cat name
 
+    bool isFixed() const noexcept ;      //true of cat is fixed
+    void fixCat() noexcept ;             //fix the cat
+
+public:
+    std::string speak() const noexcept override;  //speak, say meow
+    void dump() const noexcept override;          //print content of class
+    bool validate() const noexcept override;      //validate cat class
+
+public:
+    static bool validateName( const std::string& newName ) ;  //validates newName
 };
-
-
-#endif //EE205_LAB_08D_ANIMAL_FARM_1_TO_CLION_CAT_H
