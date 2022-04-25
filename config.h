@@ -11,6 +11,7 @@
 #pragma once
 
 #include <iomanip>
+#include <iostream>
 
 #define PROGRAM_TITLE "Animal Farm 3"
 
@@ -31,7 +32,8 @@ static void TRACE_OUT( const std::string operation, const std::string functionNa
 
 
 
-#define PRINT_HEADING_FOR_DUMP
+#define PRINT_HEADING_FOR_DUMP                                                \
+    /* Print =========================================================== */   \
     std::cout << std::setw(80) << std::setfill( '=' ) << "" << std::endl
 
 
